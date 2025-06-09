@@ -53,7 +53,7 @@
 
 > (Kamu bisa isi bagian ini sesuai stack kamu nanti, misalnya:)
 
-* Golang untuk backend
+* Nest-js untuk backend
 * Flutter & dart untuk pengembangan aplikasi mobile
 
 ---
