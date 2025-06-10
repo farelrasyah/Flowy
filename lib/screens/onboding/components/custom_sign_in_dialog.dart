@@ -74,27 +74,8 @@ Future<Object?> customSigninDialog(BuildContext context,
                         style: TextStyle(color: Colors.black54),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          icon: SvgPicture.asset(
-                            "assets/icons/email_box.svg",
-                            height: 64,
-                            width: 64,
-                          ),
-                        ),
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          icon: SvgPicture.asset(
-                            "assets/icons/apple_box.svg",
-                            height: 64,
-                            width: 64,
-                          ),
-                        ),
+                    
+                    
                         IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {},
@@ -104,11 +85,10 @@ Future<Object?> customSigninDialog(BuildContext context,
                             width: 64,
                           ),
                         ),
+                    
                       ],
-                    ),
-                    // Add bottom padding to make space for the close button
-                    SizedBox(height: 32),
-                  ],
+
+                  
                 ),
               ),
               const Positioned(
