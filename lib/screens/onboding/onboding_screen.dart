@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
 import 'components/animated_btn.dart';
-import 'components/custom_sign_in_dialog.dart';
-
+import 'components/custom_auth_dialog.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -93,8 +92,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               isSignInDialogShown = true;
                             });
 
-                            customSigninDialog(
+                            customAuthDialog(
                               context,
+                              showSignIn: false, // Show registration form first
                               onCLosed: (_) {
                                 setState(() {
                                   isSignInDialogShown = false;
