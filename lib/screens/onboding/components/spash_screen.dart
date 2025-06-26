@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'sign_in.dart';
+import 'selection_login_register.dart';
 import '../../../utils/colors.dart';
 
 
@@ -644,65 +644,99 @@ class _MySplashScreenState extends State<MySplashScreen>
                               ),
                               child: Row(
                                 children: [
-                                  // Register Button with Hover Effect
+                                  // Register Button
                                   Expanded(
-                                    child: _ModernButton(
-                                      text: "Register",
-                                      isSelected: true,
-                                      onTap: () {
-                                        // Add register navigation here with animation
-                                        HapticFeedback.lightImpact();
-                                      },
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          Colors.white,
-                                          Colors.white.withOpacity(0.95),
+                                    child: Container(
+                                      height: 56,
+                                      margin: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Colors.white,
+                                            Colors.white.withOpacity(0.95),
+                                          ],
+                                        ),
+                                        borderRadius: BorderRadius.circular(28),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: primaryColor.withOpacity(0.3),
+                                            blurRadius: 12,
+                                            offset: const Offset(0, 2),
+                                          ),
                                         ],
                                       ),
-                                      textColor: textColor1,
-                                      shadows: [
-                                        BoxShadow(
-                                          color: primaryColor.withOpacity(0.3),
-                                          blurRadius: 12,
-                                          offset: const Offset(0, 2),
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: InkWell(
+                                          borderRadius: BorderRadius.circular(28),
+                                          onTap: () {
+                                            print("Register button tapped!");
+                                            HapticFeedback.lightImpact();
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => const SelectionLoginRegister(),
+                                              ),
+                                            );
+                                          },
+                                          child: Center(
+                                            child: Text(
+                                              "Register",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 16,
+                                                color: textColor1,
+                                                letterSpacing: 0.5,
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                   
-                                  // Sign In Button with Hover Effect
+                                  // Login Button
                                   Expanded(
-                                    child: _ModernButton(
-                                      text: "Sign In",
-                                      isSelected: false,
-                                      onTap: () {
-                                        HapticFeedback.lightImpact();
-                                        Navigator.push(
-                                          context,
-                                          PageRouteBuilder(
-                                            pageBuilder: (context, animation, secondaryAnimation) =>
-                                                const SignIn(),
-                                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                              return SlideTransition(
-                                                position: Tween<Offset>(
-                                                  begin: const Offset(1.0, 0.0),
-                                                  end: Offset.zero,
-                                                ).animate(CurvedAnimation(
-                                                  parent: animation,
-                                                  curve: Curves.easeInOutCubic,
-                                                )),
-                                                child: FadeTransition(
-                                                  opacity: animation,
-                                                  child: child,
+                                    child: Container(
+                                      height: 56,
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: InkWell(
+                                          borderRadius: BorderRadius.circular(28),
+                                          onTap: () {
+                                            print("Login button tapped!");
+                                            HapticFeedback.lightImpact();
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => const SelectionLoginRegister(),
+                                              ),
+                                            );
+                                          },
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "Login",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 16,
+                                                    color: textColor1,
+                                                    letterSpacing: 0.5,
+                                                  ),
                                                 ),
-                                              );
-                                            },
-                                            transitionDuration: const Duration(milliseconds: 600),
+                                                const SizedBox(width: 8),
+                                                Icon(
+                                                  Icons.arrow_forward_rounded,
+                                                  color: textColor1,
+                                                  size: 18,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        );
-                                      },
-                                      textColor: textColor1,
-                                      showArrow: true,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -779,70 +813,62 @@ class _ModernButtonState extends State<_ModernButton>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) {
-        setState(() => _isPressed = true);
-        _animationController.forward();
-      },
-      onTapUp: (_) {
-        setState(() => _isPressed = false);
-        _animationController.reverse();
-        widget.onTap();
-      },
-      onTapCancel: () {
-        setState(() => _isPressed = false);
-        _animationController.reverse();
-      },
-      child: ScaleTransition(
-        scale: _scaleAnimation,
-        child: Container(
-          height: 56,
-          margin: widget.isSelected ? const EdgeInsets.all(4) : EdgeInsets.zero,
-          decoration: BoxDecoration(
-            gradient: widget.gradient,
+    return ScaleTransition(
+      scale: _scaleAnimation,
+      child: Container(
+        height: 56,
+        margin: widget.isSelected ? const EdgeInsets.all(4) : EdgeInsets.zero,
+        decoration: BoxDecoration(
+          gradient: widget.gradient,
+          borderRadius: BorderRadius.circular(28),
+          boxShadow: widget.shadows,
+          border: !widget.isSelected && _isPressed
+              ? Border.all(color: Colors.white.withOpacity(0.3), width: 1)
+              : null,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
             borderRadius: BorderRadius.circular(28),
-            boxShadow: widget.shadows,
-            border: !widget.isSelected && _isPressed
-                ? Border.all(color: Colors.white.withOpacity(0.3), width: 1)
-                : null,
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(28),
-              onTap: () {}, // Handled by GestureDetector
-              child: Center(
-                child: widget.showArrow
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            widget.text,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                              color: widget.textColor,
-                              letterSpacing: 0.5,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Icon(
-                            Icons.arrow_forward_rounded,
+            onTap: () {
+              setState(() => _isPressed = true);
+              _animationController.forward().then((_) {
+                _animationController.reverse();
+                setState(() => _isPressed = false);
+              });
+              widget.onTap(); // Call the actual onTap function
+            },
+            child: Center(
+              child: widget.showArrow
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.text,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
                             color: widget.textColor,
-                            size: 18,
+                            letterSpacing: 0.5,
                           ),
-                        ],
-                      )
-                    : Text(
-                        widget.text,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16,
-                          color: widget.textColor,
-                          letterSpacing: 0.5,
                         ),
+                        const SizedBox(width: 8),
+                        Icon(
+                          Icons.arrow_forward_rounded,
+                          color: widget.textColor,
+                          size: 18,
+                        ),
+                      ],
+                    )
+                  : Text(
+                      widget.text,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                        color: widget.textColor,
+                        letterSpacing: 0.5,
                       ),
-              ),
+                    ),
             ),
           ),
         ),
