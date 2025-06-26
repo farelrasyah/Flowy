@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'sign_in_form.dart';
+import 'sign_in.dart';
 
 Future<Object?> customSigninDialog(BuildContext context,
     {required ValueChanged onCLosed}) {
@@ -51,7 +51,7 @@ Future<Object?> customSigninDialog(BuildContext context,
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SignInForm(),
+                    const SignIn(),
                     Row(
                       children: const [
                         Expanded(child: Divider()),

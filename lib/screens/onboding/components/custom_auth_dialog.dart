@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'sign_in_form.dart';
-import 'sign_up_form.dart';
+import 'sign_in.dart';
+import 'sign_up.dart';
 
 Future<Object?> customAuthDialog(BuildContext context,
     {required ValueChanged onCLosed, bool showSignIn = false}) {
@@ -91,7 +91,7 @@ class _AuthNavigationDialogState extends State<AuthNavigationDialog> {
                       ),
                     ),
                     // Show either Sign In or Sign Up form
-                    showSignIn ? const SignInForm() : const SignUpForm(),
+                    showSignIn ? const SignIn() : const SignUp(),
 
                     // Navigation button between forms
                     Padding(

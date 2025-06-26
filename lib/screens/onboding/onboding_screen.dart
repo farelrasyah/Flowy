@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
 import 'components/animated_btn.dart';
-import 'components/custom_auth_dialog.dart';
+import 'components/spash_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -14,7 +14,6 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  bool isSignInDialogShown = false;
   late RiveAnimationController _btnAnimationColtroller;
 
   @override
@@ -50,7 +49,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
           AnimatedPositioned(
-            top: isSignInDialogShown ? -50 : 0,
+            top: 0,
             duration: const Duration(milliseconds: 240),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
@@ -88,18 +87,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         Future.delayed(
                           const Duration(milliseconds: 800),
                           () {
-                            setState(() {
-                              isSignInDialogShown = true;
-                            });
-
-                            customAuthDialog(
+                            Navigator.push(
                               context,
-                              showSignIn: false, // Show registration form first
-                              onCLosed: (_) {
-                                setState(() {
-                                  isSignInDialogShown = false;
-                                });
-                              },
+                              MaterialPageRoute(
+                                builder: (context) => const MySplashScreen(),
+                              ),
                             );
                           },
                         );
